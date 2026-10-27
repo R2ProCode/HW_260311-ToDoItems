@@ -1,33 +1,13 @@
 html {
     font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
     html {
         font-size: 16px;
     }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    margin-bottom: 60px;
-}
-
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-    color: var(--bs-secondary-color);
-    text-align: end;
-}
-
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-    text-align: start;
 }
 
 :root {
@@ -37,41 +17,142 @@ body {
     --primary: #6366f1;
     --text: #f8fafc;
     --muted: #94a3b8;
+    --border: #374151;
 }
 
 body {
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
+    margin-bottom: 60px;
 }
 
-/* Cards */
+/* Bootstrap Focus */
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 .2rem rgba(99,102,241,.25);
+}
+
+/* Floating Labels */
+
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
+    color: var(--bs-secondary-color);
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+/* General Cards */
 
 .card {
     background: var(--card);
-    border: 1px solid #374151;
+    color: var(--text);
+    border: 1px solid var(--border);
     border-radius: 1.5rem;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,.25);
 }
 
-/* List Items */
+/* Specialized Task Containers */
 
+.task-container,
+.task-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+.task-card {
+    transition: all .25s ease;
+}
+
+    .task-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--primary);
+        box-shadow: 0 15px 40px rgba(0,0,0,.35);
+    }
+
+.task-container .card-header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem;
+}
+
+/* Task Items */
+
+.task-item,
 .list-group-item {
     background: var(--card);
     color: var(--text);
-    border-color: #374151;
+    border-bottom: 1px solid var(--border);
     transition: all .2s ease;
 }
 
+.task-item {
+    padding: 1.25rem 1.5rem;
+}
+
+    .task-item:hover,
     .list-group-item:hover {
         background: var(--card-hover);
+    }
+
+    .task-item:last-child {
+        border-bottom: none;
+    }
+
+    .task-item h5,
+    .task-item h6,
+    .task-card h5 {
+        color: var(--text);
+    }
+
+    .task-item small {
+        color: #cbd5e1;
+    }
+
+/* Navbar */
+
+.navbar {
+    backdrop-filter: blur(12px);
+}
+
+.nav-link {
+    color: #cbd5e1 !important;
+    transition: .2s;
+}
+
+    .nav-link:hover {
+        background: rgba(255,255,255,.08);
+        color: white !important;
+    }
+
+.nav-pill {
+    color: #cbd5e1 !important;
+    border-radius: 999px;
+    padding: .5rem 1rem !important;
+}
+
+    .nav-pill:hover {
+        background: var(--border);
+        color: white !important;
     }
 
 /* Buttons */
 
 .btn {
     border-radius: 999px;
+    font-weight: 600;
     padding-left: 1.1rem;
     padding-right: 1.1rem;
     transition: all .2s ease;
@@ -91,17 +172,27 @@ body {
         border-color: #4f46e5;
     }
 
-/* Links */
-
-.nav-link {
-    color: #cbd5e1 !important;
-    transition: .2s;
+.btn-secondary {
+    background: var(--border);
+    border-color: var(--border);
 }
 
-    .nav-link:hover {
-        background: rgba(255,255,255,.08);
-        color: white !important;
+    .btn-secondary:hover {
+        background: #4b5563;
+        border-color: #4b5563;
     }
+
+.btn-outline-light:hover {
+    background: var(--border);
+}
+
+/* Action Buttons */
+
+.action-btn {
+    border-radius: 999px;
+    font-weight: 600;
+    padding: .65rem 1.2rem;
+}
 
 /* Badges */
 
@@ -112,361 +203,51 @@ body {
 
 /* Forms */
 
+.form-label {
+    color: #e2e8f0;
+}
+
 .form-control,
 .form-select {
-    background: #111827;
-    border: 1px solid #374151;
-    color: white;
-    border-radius: 1rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 16px;
+    padding: .85rem 1rem;
 }
+
+    .form-control::placeholder {
+        color: var(--muted);
+    }
 
     .form-control:focus,
     .form-select:focus {
-        background: #111827;
+        background: var(--bg);
         color: white;
-        border-color: #6366f1;
-        box-shadow: 0 0 0 0.2rem rgba(99,102,241,.25);
+        border-color: var(--primary);
+        box-shadow: 0 0 0 .2rem rgba(99,102,241,.25);
     }
 
-/* Header */
-
-.navbar {
-    backdrop-filter: blur(12px);
-}
-
-.task-card {
-    background: #1f2937;
-    border: 1px solid #374151;
-    border-radius: 24px;
-    transition: all .25s ease;
-}
-
-    .task-card:hover {
-        transform: translateY(-4px);
-        border-color: #6366f1;
-        box-shadow: 0 15px 40px rgba(0,0,0,.35);
-    }
-
-    .task-card h5 {
-        color: #f8fafc;
-    }
-
-.nav-pill {
-    color: #cbd5e1 !important;
-    border-radius: 999px;
-    padding: .5rem 1rem !important;
-}
-
-    .nav-pill:hover {
-        background: #374151;
-        color: white !important;
-    }
-
-.action-btn {
-    border-radius: 999px;
-    font-weight: 600;
-    padding: .65rem 1.2rem;
-    transition: .2s ease;
-}
-
-    .action-btn:hover {
-        transform: translateY(-2px);
-    }
-
-.btn-primary {
-    background: #6366f1;
-    border-color: #6366f1;
-}
-
-    .btn-primary:hover {
-        background: #4f46e5;
-        border-color: #4f46e5;
-    }
-
-.btn-secondary {
-    background: #374151;
-    border-color: #374151;
-}
-
-    .btn-secondary:hover {
-        background: #4b5563;
-        border-color: #4b5563;
-    }
-
-.task-container {
-    background: #1f2937;
-    border: 1px solid #374151;
-    border-radius: 24px;
-    overflow: hidden;
-}
-
-.task-item {
-    background: #1f2937;
-    color: white;
-    border-bottom: 1px solid #374151;
-    transition: all .2s ease;
-}
-
-    .task-item:hover {
-        background: #293548;
-    }
-
-    .task-item:last-child {
-        border-bottom: none;
-    }
-
-.task-container {
-    background: #1f2937;
-    border: 1px solid #374151;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
-}
-
-.task-item {
-    background: #1f2937;
-    color: #f8fafc;
-    border-bottom: 1px solid #374151;
-    transition: all .2s ease;
-    padding: 1rem 1.5rem;
-}
-
-    .task-item:hover {
-        background: #293548;
-    }
-
-    .task-item:last-child {
-        border-bottom: none;
-    }
-
-    .task-item h5,
-    .task-item h6 {
-        color: #f8fafc;
-    }
-
-    .task-item small {
-        color: #cbd5e1;
-    }
-
-.task-container .card-header {
-    background: #111827;
-    border-bottom: 1px solid #374151;
-    padding: 1.25rem 1.5rem;
-}
-
-    .task-container .card-header h2,
-    .task-container .card-header h1 {
+    .form-select option {
+        background: var(--card);
         color: white;
     }
 
-/* Card Container */
-
-.task-container {
-    background: #1f2937;
-    border: 1px solid #374151;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,.25);
-}
-
-    /* Header */
-
-    .task-container .card-header {
-        background: #111827;
-        border-bottom: 1px solid #374151;
-        padding: 1.25rem 1.5rem;
-    }
-
-/* Category Rows */
-
-.task-item {
-    background: #1f2937;
-    color: #f8fafc;
-    border-bottom: 1px solid #374151;
-    padding: 1.25rem 1.5rem;
-    transition: all .2s ease;
-}
-
-    .task-item:hover {
-        background: #293548;
-    }
-
-    .task-item:last-child {
-        border-bottom: none;
-    }
-
-/* Category Icon */
+/* Category Page */
 
 .category-icon {
     width: 42px;
     height: 42px;
     border-radius: 12px;
-    background: #374151;
+    background: var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.1rem;
 }
 
-/* Buttons */
-
-.btn {
-    border-radius: 999px;
-    font-weight: 600;
-    transition: all .2s ease;
-}
-
-    .btn:hover {
-        transform: translateY(-2px);
-    }
-
-.btn-primary {
-    background: #6366f1;
-    border-color: #6366f1;
-}
-
-    .btn-primary:hover {
-        background: #4f46e5;
-        border-color: #4f46e5;
-    }
-
-.btn-outline-light:hover {
-    background: #374151;
-}
-
-/* Text */
+/* Utility */
 
 .text-white {
-    color: #f8fafc !important;
-}
-
-.task-container {
-    background: #1f2937;
-    border: 1px solid #374151;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,.25);
-}
-
-    .task-container .card-header {
-        background: #111827;
-        border-bottom: 1px solid #374151;
-        padding: 1.25rem 1.5rem;
-    }
-
-/* Inputs */
-
-.form-control {
-    background: #111827;
-    border: 1px solid #374151;
-    color: #f8fafc;
-    border-radius: 16px;
-    padding: .9rem 1rem;
-}
-
-    .form-control::placeholder {
-        color: #94a3b8;
-    }
-
-    .form-control:focus {
-        background: #111827;
-        color: #fff;
-        border-color: #6366f1;
-        box-shadow: 0 0 0 .25rem rgba(99,102,241,.25);
-    }
-
-/* Buttons */
-
-.btn-primary {
-    background: #6366f1;
-    border-color: #6366f1;
-    font-weight: 600;
-}
-
-    .btn-primary:hover {
-        background: #4f46e5;
-        border-color: #4f46e5;
-        transform: translateY(-2px);
-    }
-
-.btn {
-    transition: all .2s ease;
-}
-
-.task-container {
-    background: #1f2937;
-    border: 1px solid #374151;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,.25);
-}
-
-    .task-container .card-header {
-        background: #111827;
-        border-bottom: 1px solid #374151;
-        padding: 1.5rem;
-    }
-
-/* Inputs */
-
-.form-control,
-.form-select {
-    background: #111827;
-    border: 1px solid #374151;
-    color: #f8fafc;
-    border-radius: 16px;
-    padding: .85rem 1rem;
-}
-
-    .form-control::placeholder {
-        color: #94a3b8;
-    }
-
-    .form-control:focus,
-    .form-select:focus {
-        background: #111827;
-        color: white;
-        border-color: #6366f1;
-        box-shadow: 0 0 0 .2rem rgba(99,102,241,.25);
-    }
-
-    /* Dropdown options */
-
-    .form-select option {
-        background: #1f2937;
-        color: white;
-    }
-
-/* Buttons */
-
-.btn {
-    transition: all .2s ease;
-    font-weight: 600;
-}
-
-    .btn:hover {
-        transform: translateY(-2px);
-    }
-
-.btn-primary {
-    background: #6366f1;
-    border-color: #6366f1;
-}
-
-    .btn-primary:hover {
-        background: #4f46e5;
-        border-color: #4f46e5;
-    }
-
-/* Labels */
-
-.form-label {
-    color: #e2e8f0;
-}
-
-/* Fix text colors inside cards */
-
-.card,
-.card * {
-    color: #f8fafc;
+    color: var(--text) !important;
 }
