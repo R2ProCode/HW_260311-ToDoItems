@@ -16,6 +16,7 @@ namespace HW_260311_ToDoItems.Controllers
             };
             return View(viewModel);
         }
+
         [HttpPost]
         public IActionResult MarkAsCompleted(int itemId)
         {
@@ -100,6 +101,16 @@ namespace HW_260311_ToDoItems.Controllers
             ToDoItemsDbManager manager = new ToDoItemsDbManager(_connectionString);
             manager.UpdateCategory(category);
             return Redirect("/home/categories");
+        }
+
+        public IActionResult ByCategory(int id)
+        {
+            ToDoItemsDbManager mgr = new ToDoItemsDbManager(_connectionString);
+            List<Item> items = mgr.GetByCategory(id);
+            return View(new ToDoItemListViewModel
+            {
+                Items = items
+            });
         }
     }
 }

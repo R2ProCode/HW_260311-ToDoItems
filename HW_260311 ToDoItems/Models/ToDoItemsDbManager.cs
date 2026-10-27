@@ -43,7 +43,8 @@ namespace HW_260311_ToDoItems.Models
         {
             var connection = new SqlConnection(_connectionString);
             var command = connection.CreateCommand();
-            command.CommandText = "UPDATE Items SET IsCompleted = 1, DateCompleted = GETDATE() WHERE Id = @itemId";
+            command.CommandText = "UPDATE Items SET IsCompleted = 1, DateCompleted = @dateCompleted WHERE Id = @itemId";
+            command.Parameters.AddWithValue("@dateCompleted", DateTime.Now);
             command.Parameters.AddWithValue("@itemId", itemId);
             connection.Open();
             command.ExecuteNonQuery();
@@ -153,6 +154,34 @@ namespace HW_260311_ToDoItems.Models
             command.Parameters.AddWithValue("@categoryId", category.CategoryId);
             connection.Open();
             command.ExecuteNonQuery();
+        }
+
+        public List<Item> GetByCategory(int id)
+        {
+            var connection = new SqlConnection(_connectionString);
+            var command = connection.CreateCommand();
+            command.CommandText = @"SELECT * FROM Items i
+                                    JOIN Categories c
+                                    ON c.CategoryId = i.CategoryId 
+                                    WHERE i.CategoryId = @id";
+            command.Parameters.AddWithValue("@id", id);
+            connection.Open();
+            var items = new List<Item>();
+            var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                items.Add(new Item
+                {
+                    ItemId = (int)reader["Id"],
+                    Title = (string)reader["Title"],
+                    DueDate = (DateTime)reader["DueDate"],
+                    IsCompleted = (bool)reader["IsCompleted"],
+                    DateCompleted = reader.GetOrNull<DateTime?>("DateCompleted"),
+                    CategoryId = (int)reader["CategoryId"],
+                    Name = (string)reader["Name"]
+                });
+            }
+            return items;
         }
     }
 }
