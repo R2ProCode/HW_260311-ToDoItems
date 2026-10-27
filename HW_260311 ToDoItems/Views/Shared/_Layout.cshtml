@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HW_260311_ToDoItems</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HW_260311_ToDoItems.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ToDoItems</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarContent">
+
+                    <!-- Left Side -->
+                    <ul class="navbar-nav me-auto gap-2">
+
+                        <li class="nav-item">
+                            <a class="nav-link nav-pill"
+                               asp-controller="Home"
+                               asp-action="Index">
+                                Active
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link nav-pill"
+                               asp-controller="Home"
+                               asp-action="Completed">
+                                Completed
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link nav-pill"
+                               asp-controller="Home"
+                               asp-action="Categories">
+                                Categories
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <!-- Right Side -->
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-primary action-btn"
+                           asp-controller="Home"
+                           asp-action="NewItem">
+                            + New Task
+                        </a>
+
+                        <a class="btn btn-secondary action-btn"
+                           asp-controller="Home"
+                           asp-action="NewCategory">
+                            + New Category
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+        
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

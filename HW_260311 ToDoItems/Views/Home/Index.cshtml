@@ -1,0 +1,68 @@
+﻿@using HW_260311_ToDoItems.Models
+@model ActiveViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container py-5">
+    <div class="card shadow-lg border-0 mx-auto" style="max-width: 900px;">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+            <h2 class="mb-0 fw-bold">📋 Active Tasks</h2>
+
+            <a href="/home/newitem" class="btn btn-primary">
+                + Create Task
+            </a>
+        </div>
+
+        <div class="row g-4">
+            @foreach (var item in Model.Items)
+            {
+                <div class="col-md-6">
+                    <div class="card task-card h-100">
+
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+
+                                <div>
+                                    <h5 class="fw-bold">
+                                        @item.Title
+                                    </h5>
+
+                                    <span class="badge bg-primary">
+                                        @item.Name
+                                    </span>
+
+                                    @if (item.DueDate < DateTime.Now)
+                                    {
+                                        <span class="badge bg-danger">
+                                            Overdue
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+
+                            <p class="text-secondary mt-3 mb-4">
+                                Due: @item.DueDate.ToShortDateString()
+                            </p>
+
+                            <form method="post"
+                                  action="/home/markascompleted">
+
+                                <input type="hidden"
+                                       name="itemid"
+                                       value="@item.ItemId" />
+
+                                <button class="btn btn-success rounded-pill w-100">
+                                    ✓ Complete
+                                </button>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

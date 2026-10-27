@@ -1,0 +1,70 @@
+﻿@using HW_260311_ToDoItems.Models
+@model NewItemViewModel
+
+<div class="card task-container mx-auto mt-5" style="max-width: 700px;">
+
+    <div class="card-header">
+        <h2 class="mb-0 fw-bold text-white">
+            ✅ Create Task
+        </h2>
+    </div>
+
+    <div class="card-body p-4">
+
+        <form method="post" action="/home/additem">
+
+            <div class="mb-4">
+                <label for="title"
+                       class="form-label text-light fw-semibold">
+                    Task Title
+                </label>
+
+                <input id="title"
+                       name="title"
+                       type="text"
+                       class="form-control"
+                       placeholder="Go shopping..." />
+            </div>
+
+            <div class="mb-4">
+                <label for="duedate"
+                       class="form-label text-light fw-semibold">
+                    Due Date
+                </label>
+
+                <input id="duedate"
+                       name="duedate"
+                       type="date"
+                       class="form-control" />
+            </div>
+
+            <div class="mb-4">
+                <label for="categoryId"
+                       class="form-label text-light fw-semibold">
+                    Category
+                </label>
+
+                <select id="categoryId"
+                        name="categoryId"
+                        class="form-select">
+
+                    @foreach (Category category in Model.Categories)
+                    {
+                        <option value="@category.CategoryId">
+                            @category.Name
+                        </option>
+                    }
+
+                </select>
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary rounded-pill w-100 py-3">
+                + Save Task
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

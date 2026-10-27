@@ -1,0 +1,38 @@
+﻿@using HW_260311_ToDoItems.Models
+@model CompletedViewModel
+
+<div class="card task-container mx-auto mt-5"
+     style="max-width: 900px;">
+    <div class="card-header bg-transparent border-secondary">
+        <h2 class="mb-0 fw-bold text-white">
+            ✅ Completed Tasks
+        </h2>
+    </div>
+
+    <div class="card-body p-0">
+
+        @foreach (var item in Model.Items)
+        {
+            <div class="list-group-item task-item d-flex justify-content-between align-items-center py-3 px-4">
+
+                <div>
+                    <div class="d-flex align-items-center flex-wrap gap-2">
+                        <h5 class="mb-0 fw-bold text-white">
+                            @item.Title
+                        </h5>
+
+                        <span class="badge bg-primary rounded-pill">
+                            @item.Name
+                        </span>
+                    </div>
+                </div>
+
+                <span class="badge bg-success rounded-pill px-3 py-2">
+                    ✓ @item.DateCompleted.Value.ToShortDateString()
+                </span>
+
+            </div>
+        }
+
+    </div>
+</div>

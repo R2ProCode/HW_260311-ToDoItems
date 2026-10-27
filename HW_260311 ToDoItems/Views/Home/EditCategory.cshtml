@@ -1,0 +1,44 @@
+﻿@using HW_260311_ToDoItems.Models
+@model EditCategoryViewModel
+<div class="card task-container mx-auto mt-5" style="max-width: 650px;">
+
+    <div class="card-header">
+        <h2 class="mb-0 fw-bold text-white">
+            📁 Update Category
+        </h2>
+    </div>
+
+    <div class="card-body p-4">
+
+        <form method="post" action="/home/updatecategory">
+
+            <div class="mb-4">
+
+                <label for="categoryname"
+                       class="form-label text-light fw-semibold">
+                    Category Name
+                </label>
+
+                <input id="name"
+                       name="name"
+                       type="text"
+                       class="form-control form-control-lg"
+					   value="@Model.Category.Name"
+                       placeholder="Enter category name..." />
+
+                <input type="hidden"
+                       name="CategoryId"
+                       value="@Model.Category.CategoryId" />
+
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary rounded-pill px-4 py-2 w-100">
+                + Update Category
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
