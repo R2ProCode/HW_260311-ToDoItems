@@ -16,7 +16,7 @@ namespace HW_260311_ToDoItems.Controllers
             };
             return View(viewModel);
         }
-
+        [HttpPost]
         public IActionResult MarkAsCompleted(int itemId)
         {
             ToDoItemsDbManager manager = new ToDoItemsDbManager(_connectionString);
@@ -53,7 +53,7 @@ namespace HW_260311_ToDoItems.Controllers
             };
             return View(viewModel);
         }
-
+        
         public IActionResult NewItem()
         {
             ToDoItemsDbManager manager = new ToDoItemsDbManager(_connectionString);
@@ -63,7 +63,7 @@ namespace HW_260311_ToDoItems.Controllers
             };
             return View(viewModel);
         }
-
+        [HttpPost]
         public IActionResult AddItem(Item item)
         {
             ToDoItemsDbManager manager = new ToDoItemsDbManager(_connectionString);
@@ -75,7 +75,7 @@ namespace HW_260311_ToDoItems.Controllers
         {
             return View();
         }
-
+        [HttpPost]
         public IActionResult AddCategory(Category category)
         {
             ToDoItemsDbManager manager = new ToDoItemsDbManager(_connectionString);
@@ -83,6 +83,7 @@ namespace HW_260311_ToDoItems.Controllers
             return Redirect("/home/categories");
         }
 
+        [HttpPost]
         public IActionResult UpdateCategory(Category category)
         {
             ToDoItemsDbManager manager = new ToDoItemsDbManager(_connectionString);
