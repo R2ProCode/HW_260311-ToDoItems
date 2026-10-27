@@ -3,38 +3,37 @@
 
 <div class="card task-container mx-auto mt-5" style="max-width: 900px;">
 
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <h2 class="mb-0 fw-bold text-white">
-            📁 Categories
-        </h2>
+	<div class="card-header d-flex justify-content-between align-items-center">
+		<h2 class="mb-0 fw-bold text-white">
+			📁 Categories
+		</h2>
 
-        <a href="/home/newcategory"
-           class="btn btn-primary rounded-pill px-4 py-2">
-            + New Category
-        </a>
-    </div>
+		<a href="/home/newcategory"
+		   class="btn btn-primary rounded-pill px-4 py-2">
+			+ New Category
+		</a>
+	</div>
 
-    <div class="card-body p-0">
+	<div class="card-body p-0">
 
-        @foreach (var category in Model.Categories)
-        {
-            <div class="task-item d-flex justify-content-between align-items-center">
+		@foreach (var category in Model.Categories)
+		{
+			<div class="task-item d-flex justify-content-between align-items-center">
 
-                <div class="d-flex align-items-center gap-3">
+				<div class="d-flex align-items-center gap-3">
 
-                    <div class="category-icon">
-                        📁
-                    </div>
+					<div class="category-icon">
+						📁
+					</div>
 
-                    <div>
-                        <h5 class="mb-0 fw-bold text-white">
-                            @category.Name
-                        </h5>
-                    </div>
+					<div>
+						<h5 class="mb-0 fw-bold text-white">
+							@category.Name
+						</h5>
+					</div>
 
-                </div>
-
-                <form action="/home/editcategory">
+				</div>
+				@* <form action="/home/editcategory">
                     <input type="hidden"
                            name="categoryId"
                            value="@category.CategoryId" />
@@ -43,11 +42,16 @@
                             class="btn btn-outline-light rounded-pill">
                         Edit
                     </button>
-                </form>
+                    </form> *@
+                        <a href="/home/editcategory?id=@category.CategoryId"
+		   class="btn btn-outline-light rounded-pill">
+		Edit
+			</a>
 
-            </div>
+
+</div>
         }
 
-    </div>
+</div>
 
 </div>

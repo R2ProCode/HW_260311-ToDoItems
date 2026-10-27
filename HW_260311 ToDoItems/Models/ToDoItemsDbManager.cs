@@ -109,12 +109,12 @@ namespace HW_260311_ToDoItems.Models
             command.ExecuteNonQuery();
         }
 
-        public void AddCategory(Category category)
+        public void AddCategory(string name)
         {
             var connection = new SqlConnection(_connectionString);
             var command = connection.CreateCommand();
             command.CommandText = @"INSERT INTO Categories (Name) VALUES (@name)";
-            command.Parameters.AddWithValue("@name", category.Name);
+            command.Parameters.AddWithValue("@name", name);
             connection.Open();
             command.ExecuteNonQuery();
         }
@@ -128,13 +128,18 @@ namespace HW_260311_ToDoItems.Models
             command.Parameters.AddWithValue("@categoryId", id);
             connection.Open();
             var reader = command.ExecuteReader();
-            var category = new Category();
-            while (reader.Read())
+            if (!reader.Read())
             {
-                category.CategoryId = (int)reader["CategoryId"];
-                category.Name = (string)reader["Name"];
+                return null;                
             }
-            return category;
+            else
+            {
+                return new Category
+                {
+                    CategoryId = (int)reader["CategoryId"],
+                    Name = (string)reader["Name"]
+                };
+            }
         }
 
         public void UpdateCategory(Category category)

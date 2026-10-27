@@ -44,12 +44,23 @@ namespace HW_260311_ToDoItems.Controllers
             return View(viewModel);
         }
 
-        public IActionResult EditCategory(int categoryId)
+        public IActionResult EditCategory(int id)
         {
+            //see github repos of LIT-W13 ToDoItems 👇
+            //ToDoItemsManager mgr = new ToDoItemsManager(_connectionString);
+            //Category category = mgr.GetCategory(id);
+            //if (category == null)
+            //{
+            //    return Redirect("/home/categories");
+            //}
+
+            //return View(new EditCategoryViewModel
+            //{
+            //    Category = category
+            //});
             var viewModel = new EditCategoryViewModel
             {
-                //CategoryId = categoryId,
-                Category = new ToDoItemsDbManager(_connectionString).GetCategoryById(categoryId)
+                Category = new ToDoItemsDbManager(_connectionString).GetCategoryById(id)
             };
             return View(viewModel);
         }
@@ -76,10 +87,10 @@ namespace HW_260311_ToDoItems.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddCategory(Category category)
+        public IActionResult AddCategory(string name)
         {
             ToDoItemsDbManager manager = new ToDoItemsDbManager(_connectionString);
-            manager.AddCategory(category);
+            manager.AddCategory(name);
             return Redirect("/home/categories");
         }
 
